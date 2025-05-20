@@ -1,10 +1,5 @@
 import pika
-import json
-
-
-def on_message_callback(ch, method, properties, body):
-    message_formated = json.loads(body.decode("utf-8"))
-    print(f"Received message: {message_formated}")
+from .callback import on_message_callback
 
 class RabbitMQConsumer:
     def __init__(self) -> None:
@@ -36,9 +31,6 @@ class RabbitMQConsumer:
             )
         return channel
     
-   
-    
     def start(self):
-        print("Sistema conectado ao rabbitMQ")
         self.__channel.start_consuming()
      
